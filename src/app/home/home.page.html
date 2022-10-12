@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      APP Credetials
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="singin_content">
+    <form  class="frm-singin">
+      <ion-item>
+        <ion-label position="floating" >Usuario</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button color="primary"  class="center-button" expand="block" fill="clear">Iniciar Sesion</ion-button>
+      </ion-item>
+      <ion-item style="text-align:center">
+        <ion-button color="secondary" class="center-button" expand="block" fill="clear" (click)="singup()">Registro</ion-button>
+      </ion-item>
+    </form>
+  </div>
+</ion-content>
