@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Listado Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item *ngFor="let usuario of Usuarios">
+    <ion-label>{{usuario.name}}</ion-label>
+    <ion-label>{{usuario.lastname}}</ion-label>
+    <ion-label>{{usuario.phone}}</ion-label>
+    <ion-label>{{usuario.birtdate}}</ion-label>
+    <ion-label>{{usuario.puesto}}</ion-label>
+    <ion-label>{{usuario.email}}</ion-label>
+    <div><ion-button clear (click)="deleteUser(usuario,i)" color="danger"><ion-icon name="trash" style="zoom:1.5"></ion-icon></ion-button></div>
+  </ion-item>
+</ion-list>
+<div>
+  <ion-tab-button (click)="back()">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Inicio</ion-label>
+  </ion-tab-button>
+</div>
+</ion-content>

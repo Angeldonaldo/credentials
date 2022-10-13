@@ -10,10 +10,10 @@ mongoose.connect(database.db, {
   useUnifiedTopology: true,
   useFindAndModify: false
 }).then(() => {
-  console.log('Database connected ')
+  console.log('Conexión exitosa a la base de datos')
 },
   error => {
-    console.log('Database not connected : ' + error)
+    console.log('Error al concetar base de datos :' + error)
   }
 )
 
@@ -31,7 +31,7 @@ app.use('/api', userRoute)
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-  console.log('PORT connected: ' + port)
+  console.log('PORT: ' + port)
 })
 
 app.use(function (error, res,) {

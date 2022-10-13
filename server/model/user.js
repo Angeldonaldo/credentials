@@ -11,6 +11,9 @@ let User = new Schema({
   email: {
     type: String
   },
+  birtdate:{
+    type : String
+  },
   phone: {
     type: String
   },
@@ -19,6 +22,12 @@ let User = new Schema({
   },
   image: {
     type: String
+  },
+  password:{
+    type: String
+  },
+  token:{
+    type:String
   }
 }, {
   collection: 'users'

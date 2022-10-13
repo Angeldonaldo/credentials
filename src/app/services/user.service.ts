@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { Observable,of } from 'rxjs';
 import {catchError,tap }from 'rxjs/operators'
+import { environment } from 'src/environments/environment';
 
 export class User{
   id:number;
@@ -18,19 +19,18 @@ export class User{
 })
 export class UserService {
 
-  httpOptions={
-    Headers:new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
-
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private httpClient: HttpClient) { }
   createUser(user: User): Observable<any> {
-    return this.httpClient.post<User>('http://localhost:5000/api/user', user, this.httpOptions)
+    return this.httpClient.post<User>(environment.url_api+'/api/user/create', user, this.httpOptions)
       .pipe(
-        catchError(this.handleError<User>('Error occured'))
+        catchError(this.handleError<User>('Error al registar usuario'))
       );
   }
   getUser(id): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:5000/api/user/' + id)
+    return this.httpClient.get<User[]>(environment.url_api+'/api/user/' + id)
       .pipe(
         tap(_ => console.log(`User fetched: ${id}`)),
         catchError(this.handleError<User[]>(`Get user id=${id}`))
@@ -38,7 +38,7 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:5000/api')
+    return this.httpClient.get<User[]>(environment.url_api+'/api/user')
       .pipe(
         tap(users => console.log('Users retrieved!')),
         catchError(this.handleError<User[]>('Get user', []))
@@ -46,10 +46,17 @@ export class UserService {
   }
 
   updateUser(id, user: User): Observable<any> {
-    return this.httpClient.put('http://localhost:5000/api/updateuser/' + id, user, this.httpOptions)
+    return this.httpClient.put(environment.url_api+'/api/updateuser/' + id, user, this.httpOptions)
       .pipe(
         tap(_ => console.log(`User updated: ${id}`)),
         catchError(this.handleError<User[]>('Update user'))
+      );
+  }
+  delete(id): Observable<User[]> {
+    return this.httpClient.delete<User[]>(environment.url_api+'/api/deleteuser/' + id, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`User deleted: ${id}`)),
+        catchError(this.handleError<User[]>('Delete user'))
       );
   }
   private handleError<T>(operation = 'operation', result?: T) {

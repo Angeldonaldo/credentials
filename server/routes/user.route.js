@@ -1,12 +1,14 @@
 const express = require('express');
+const cors = require("cors");
 const app = express();
 const userRoute = express.Router();
 let UserModel = require('../model/User');
 
 
-userRoute.route('/').get((req, res) => {
+userRoute.route('/user').get((req, res) => {
   UserModel.find((error, user) => {
     if (error) {
+      console.log("Error")
       return next(error)
     } else {
       res.json(user)
@@ -15,7 +17,7 @@ userRoute.route('/').get((req, res) => {
 })
 
 
-userRoute.route('/create').post((req, res, next) => {
+userRoute.route('/user/create').post((req, res, next) => {
   UserModel.create(req.body, (err, user) => {
     if (err) {
       return next(err)
